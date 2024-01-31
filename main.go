@@ -53,7 +53,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		fmt.Println(args)
 
 		if command == "hello" {
-			s.ChannelMessageSend(m.ChannelID, "Hello, "+m.Author.Username+"! (Asynchronous)")
+			s.ChannelMessageSend(m.ChannelID, "Hello, "+m.Author.Username+"!")
 		}
 	}
 
