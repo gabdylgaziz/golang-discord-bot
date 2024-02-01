@@ -16,6 +16,10 @@ func (eh *EndpointHandler) MessageCreate(s *discordgo.Session, m *discordgo.Mess
 	if strings.Contains(m.Content, "!") {
 		command, args := parseCommand(m.Content)
 
+		//	сюда можно добавить любую команду, которая будет нужно, args это все что будет написано после команды
+		//	например
+		// 	!weather Almaty - weather это команда, Almaty это args
+		//
 		switch command {
 		case "hello":
 			s.ChannelMessageSend(m.ChannelID, "Hello, "+m.Author.Username+"!")
