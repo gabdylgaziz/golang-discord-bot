@@ -9,7 +9,6 @@ import (
 )
 
 type EndpointHandler struct {
-	Dg     *discordgo.Session
 	ApiKey string
 }
 
@@ -25,19 +24,18 @@ func (eh *EndpointHandler) Start() {
 		fmt.Println("error creating Discord session,", err)
 		return
 	}
-	eh.Dg = dg
 
-	eh.Dg.Identify.Intents = discordgo.IntentsGuildMessages
+	dg.Identify.Intents = discordgo.IntentsGuildMessages
 
-	eh.AddHandlers()
+	dg.AddHandler(eh.MessageCreate)
 
-	err = eh.Dg.Open()
+	err = dg.Open()
 	if err != nil {
 		fmt.Println("error opening connection,", err)
 		return
 	}
 
-	defer eh.Dg.Close()
+	defer dg.Close()
 
 	fmt.Println("Bot is online.  Press CTRL-C to exit.")
 	sc := make(chan os.Signal, 1)
