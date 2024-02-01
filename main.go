@@ -1,8 +1,11 @@
 package main
 
-import "discord/internal/controller"
+import (
+	"discord/internal/controller"
+	"os"
+)
 
 func main() {
-	discordBot := controller.NewEndpointHandler("MTIwMjMxOTY5MjcyMzY1ODc3Mw.G2Tz0I.m0t-iwGoWIwu4kfsQEvy3Z4NJV50KNSI_WJubs")
+	discordBot := controller.NewEndpointHandler(os.Getenv("DiscordToken"))
 	discordBot.Start()
 }

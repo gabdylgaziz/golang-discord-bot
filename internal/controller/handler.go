@@ -16,22 +16,16 @@ func (eh *EndpointHandler) MessageCreate(s *discordgo.Session, m *discordgo.Mess
 	if strings.Contains(m.Content, "!") {
 		command, args := parseCommand(m.Content)
 
-		fmt.Println(args)
-
-		if command == "hello" {
+		switch command {
+		case "hello":
 			s.ChannelMessageSend(m.ChannelID, "Hello, "+m.Author.Username+"!")
-		}
-
-		if command == "help" {
+		case "help":
 			go helpHandler(s, m)
-		}
-
-		if command == "weather" {
+		case "weather":
 			go weatherHandler(s, m, args)
 		}
 	}
 
-	//fmt.Println(m.Content)
 }
 
 func parseCommand(message string) (command string, args []string) {

@@ -6,10 +6,11 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"os"
 )
 
 func GetWeather(city string) (result entity.WeatherResponse) {
-	url := fmt.Sprintf("https://api.weatherapi.com/v1/current.json?key=a1285e1455014769a06124313240102&q=%s&lang=ru", city)
+	url := fmt.Sprintf("https://api.weatherapi.com/v1/current.json?key=%s&q=%s&lang=ru", os.Getenv("WeatherAPI"), city)
 
 	response, err := http.Get(url)
 	if err != nil {
