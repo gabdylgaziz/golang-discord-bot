@@ -21,8 +21,6 @@ func (eh *EndpointHandler) MessageCreate(s *discordgo.Session, m *discordgo.Mess
 		// 	!weather Almaty - weather это команда, Almaty это args
 		//
 		switch command {
-		case "hello":
-			s.ChannelMessageSend(m.ChannelID, "Hello, "+m.Author.Username+"!")
 		case "help":
 			go helpHandler(s, m)
 		case "weather":
@@ -50,7 +48,7 @@ func helpHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
-	help := fmt.Sprintf("Привет, %s. Вот список доступных команд: \n !weather название города - Посмотреть погоду определенного города ", m.Author.Username)
+	help := fmt.Sprintf("Привет, %s. Вот список доступных команд: \n !weather название города - Посмотреть погоду определенного города \n !translate <язык> <Текст> - перевод текста на определенный язык ", m.Author.Username)
 
 	s.ChannelMessageSend(m.ChannelID, help)
 }
