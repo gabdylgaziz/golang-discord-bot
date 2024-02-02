@@ -53,3 +53,21 @@ type WeatherResponse struct {
 	WindKph   float64 `json:"wind_kph"`
 	Humidity  int     `json:"humidity"`
 }
+
+type TranslatedText struct {
+	Data struct {
+		Translations []struct {
+			TranslatedText string `json:"translatedText"`
+		} `json:"translations"`
+	} `json:"data"`
+}
+
+type SourceLanguage struct {
+	Data struct {
+		Detections [][]struct {
+			Confidence float64 `json:"confidence"`
+			IsReliable bool    `json:"isReliable"`
+			Language   string  `json:"language"`
+		} `json:"detections"`
+	} `json:"data"`
+}

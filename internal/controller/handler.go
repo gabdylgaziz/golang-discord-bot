@@ -27,6 +27,8 @@ func (eh *EndpointHandler) MessageCreate(s *discordgo.Session, m *discordgo.Mess
 			go helpHandler(s, m)
 		case "weather":
 			go weatherHandler(s, m, args)
+		case "translate":
+			go translateHandler(s, m, args)
 		}
 	}
 
@@ -69,4 +71,18 @@ func weatherHandler(s *discordgo.Session, m *discordgo.MessageCreate, args []str
 	)
 
 	s.ChannelMessageSend(m.ChannelID, answer)
+}
+
+func translateHandler(s *discordgo.Session, m *discordgo.MessageCreate, args []string) {
+	if m.Author.ID == s.State.User.ID {
+		return
+	}
+
+	resultString := strings.Join(args[1:], " ")
+	sourceLang := api.Detect(resultString)
+	targetLang := args[0]
+
+	translatedText := api.Translate(resultString, targetLang, sourceLang)
+
+	s.ChannelMessageSend(m.ChannelID, translatedText)
 }
